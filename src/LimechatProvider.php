@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 use Flits\Limechat\LimechatException;
 
 class LimechatProvider {
-    public $BASE_URL = "https://flow-builder.limechat.ai/builder/v1/event/create";
+    public $BASE_URL = "https://flow-builder.limechat.ai/builder/v1/event/";
     public $HEADERS;
     public $EXTRA_CONFIG;
     public $client;
@@ -44,7 +44,7 @@ class LimechatProvider {
         } catch (RequestException $ex) {
             throw new LimechatException($ex->getResponse()->getBody()->getContents(), $ex->getResponse()->getStatusCode());
         }
-        if ($response->getStatusCode() != 200) {
+        if ($response->getStatusCode() != 201) {
             throw new LimechatException($response->getBody()->getContents(), $response->getStatusCode());
         }
         return json_decode($response->getBody()->getContents());
